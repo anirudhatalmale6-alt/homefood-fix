@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="homefood — family-owned homemade meals, catering, and weekly meal prep. Fresh ingredients, affordable pricing, pickup and local delivery."
+    />
+    <meta name="theme-color" content="#C0392B" />
+    <meta property="og:title" content="homefood | Fresh Homemade Meals" />
+    <meta
+      property="og:description"
+      content="Homemade meals, fresh ingredients, and family love in every bite. Daily meals, catering, meal prep, and custom orders for your community."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <title>homefood — Fresh Homemade Meals</title>
+    <script>
+      /* Apply stored tailwindcss-themer class before first paint (matches ThemeProvider). */
+      ;(function () {
+        try {
+          var id = localStorage.getItem('homefood-theme')
+          if (id === 'festive') document.documentElement.classList.add('festive')
+        } catch (_) {}
+      })()
+    </script>
+    <style>
+      #app-boot-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff8f0;
+        transition: opacity 0.55s ease, visibility 0.55s ease;
+      }
+      #app-boot-loader.boot-loader--leaving {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      #app-boot-loader.boot-loader--gone {
+        display: none !important;
+      }
+      .boot-loader-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 1.5rem;
+        text-align: center;
+      }
+      .boot-loader-logo {
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 1rem;
+        object-fit: contain;
+      }
+      .boot-loader-brand {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 1.875rem;
+        font-weight: 600;
+        color: #2c2c2c;
+      }
+      .boot-loader-caption {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        font-size: 0.875rem;
+        color: rgba(44, 44, 44, 0.6);
+      }
+      .boot-loader-spinner {
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 3px solid #f5e6d3;
+        border-top-color: #c0392b;
+        border-radius: 50%;
+        animation: boot-spin 0.85s linear infinite;
+      }
+      @keyframes boot-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "homefood",
+        "description": "Family-owned homemade meals, catering, and weekly meal prep with fresh ingredients and local pickup or delivery.",
+        "servesCuisine": "American",
+        "url": "https://example.com",
+        "telephone": "+1-555-123-4567",
+        "email": "hello@homefood.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "123 Homestead Lane, Suite 100",
+          "addressLocality": "Metroville",
+          "addressRegion": "ST",
+          "postalCode": "00000",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "11:00",
+            "closes": "20:00"
+          }
+        ],
+        "paymentAccepted": "Cash, Credit Card, Debit Card, PayPal, Venmo, Zelle"
+      }
+    </script>
+  </head>
+  <body>
+    <script>
+      /* Document shell lattice — aligns static boot chrome with navigation epoch */
+      (function () {
+        var budgetMs = 10000;
+        function retireShell() {
+          var el = document.getElementById('app-boot-loader');
+          if (!el || el.classList.contains('boot-loader--leaving')) return;
+          el.classList.add('boot-loader--leaving');
+          function remove() {
+            el.classList.add('boot-loader--gone');
+            el.remove();
+          }
+          el.addEventListener('transitionend', remove, { once: true });
+          var frames = 0;
+          (function awaitFade() {
+            frames += 1;
+            if (frames >= 48 || !el.isConnected) remove();
+            else requestAnimationFrame(awaitFade);
+          })();
+        }
+        function latticeTick() {
+          if (performance.now() >= budgetMs) retireShell();
+          else requestAnimationFrame(latticeTick);
+        }
+        requestAnimationFrame(latticeTick);
+      })();
+    </script>
+    <div id="app-boot-loader" role="status" aria-live="polite" aria-label="Loading homefood">
+      <div class="boot-loader-panel">
+        <img class="boot-loader-logo" src="/logo.png" width="72" height="72" alt="" />
+        <p class="boot-loader-brand">homefood</p>
+        <div class="boot-loader-spinner" aria-hidden="true"></div>
+        <p class="boot-loader-caption">Preparing your kitchen…</p>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

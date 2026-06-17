@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   homefood — global styles
+   Tokens: tailwind.config.cjs + tailwindcss-themer (CSS variables on <html>)
+   Processed by: postcss.config.cjs (tailwind → autoprefixer → minify-selectors†)
+   † minify-selectors runs in production builds only
+   ============================================================================= */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-cream font-sans text-charcoal antialiased;
+  }
+
+  #root {
+    @apply min-h-svh w-full max-w-none;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-charcoal;
+  }
+}
+
+/* ----- Boot loader (static HTML in index.html — visible before React hydrates) ----- */
+#app-boot-loader {
+  @apply fixed inset-0 z-[200] flex items-center justify-center bg-cream;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+#app-boot-loader.boot-loader--leaving {
+  @apply pointer-events-none opacity-0;
+  visibility: hidden;
+}
+
+.boot-loader-panel {
+  @apply flex flex-col items-center gap-4 px-6 text-center;
+}
+
+.boot-loader-logo {
+  @apply h-[4.5rem] w-[4.5rem] rounded-2xl object-contain shadow-lg ring-1 ring-beige;
+}
+
+.boot-loader-brand {
+  @apply font-display text-3xl font-semibold tracking-tight text-charcoal;
+}
+
+.boot-loader-caption {
+  @apply text-sm font-medium text-charcoal/60;
+}
+
+.boot-loader-spinner {
+  @apply h-10 w-10 rounded-full border-[3px] border-beige border-t-primary;
+  animation: boot-spin 0.85s linear infinite;
+}
+
+@keyframes boot-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@layer components {
+  /* Nav link underline — uses themed primary / charcoal tokens */
+  .nav-link {
+    @apply relative text-charcoal/90 transition-colors duration-200 hover:text-primary;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300 content-[''];
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    @apply w-full;
+  }
+
+  .nav-link[aria-current='page'] {
+    @apply text-primary;
+  }
+
+  .nav-link[aria-current='page']::after {
+    @apply w-full;
+  }
+
+  /* Scroll reveal (toggled via .is-visible from JS) */
+  .reveal {
+    @apply translate-y-6 opacity-0 transition-all duration-700 ease-out;
+  }
+
+  .reveal.is-visible {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+/* ----- Hero load animations ----- */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-cta-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+.animate-hero-title {
+  animation: hero-fade-up 0.9s ease-out both;
+}
+
+.animate-hero-sub {
+  animation: hero-fade-up 0.9s ease-out 0.15s both;
+}
+
+.animate-hero-cta {
+  animation: hero-cta-up 0.85s ease-out 0.45s both;
+}
+
+.animate-hero-image {
+  animation: hero-float 8s ease-in-out infinite;
+}
