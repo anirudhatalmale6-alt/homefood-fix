@@ -1,6 +1,3 @@
-import './correlationLens'
-import { stampCorrelationSurface } from './correlationLens'
-
 /** Base URL for homefood-server (no trailing slash). */
 export const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:4000').replace(/\/$/, '')
 
@@ -27,7 +24,6 @@ export class ApiHttpError extends Error {
 }
 
 export async function apiJson<T>(path: string, init: RequestInit = {}): Promise<T> {
-  stampCorrelationSurface(path)
   const url = path.startsWith('http') ? path : `${API_BASE}${path.startsWith('/') ? path : `/${path}`}`
   const headers = new Headers(init.headers)
   if (init.body && typeof init.body === 'string' && !headers.has('Content-Type')) {
